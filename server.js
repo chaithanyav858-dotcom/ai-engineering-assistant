@@ -98,50 +98,73 @@ app.post('/api/chat', async (req, res) => {
       }
     };
 
-    // 5. Send POST request to Gemini 2.5 Flash Endpoint
-    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-    
-    // Set a timeout of 20 seconds for safety
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 20000);
+    // 5. Send POST request to Gemini Endpoint with fallback support
+    const models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+    let lastError = null;
+    let responseData = null;
+    let successfulModel = null;
 
-    const response = await fetch(geminiEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestBody),
-      signal: controller.signal
-    });
+    for (const model of models) {
+      try {
+        console.log(`Attempting Gemini API request using model: ${model}`);
+        const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+        
+        // Set a timeout of 20 seconds for safety
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 20000);
 
-    clearTimeout(timeoutId);
+        const response = await fetch(geminiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody),
+          signal: controller.signal
+        });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('Gemini API Error details:', errorData);
-      return res.status(response.status).json({
-        error: errorData.error?.message || `Gemini API returned status code ${response.status}.`
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.warn(`Gemini API Error for model ${model}:`, errorData);
+          lastError = errorData.error?.message || `Gemini API returned status code ${response.status}.`;
+          
+          // Try the next fallback model in the list
+          continue;
+        }
+
+        const data = await response.json();
+
+        // Validate structure of return data
+        if (
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0]
+        ) {
+          responseData = data;
+          successfulModel = model;
+          console.log(`Successfully generated response using model: ${model}`);
+          break; // Break the loop on success
+        } else {
+          console.warn(`Invalid Gemini API response structure for model ${model}:`, JSON.stringify(data));
+          lastError = 'Received an invalid or empty response from the AI model service.';
+        }
+      } catch (err) {
+        console.error(`Fetch error during model ${model} execution:`, err);
+        lastError = err.message || err;
+      }
+    }
+
+    if (!responseData) {
+      return res.status(503).json({
+        error: `All generative models failed due to high demand or API rate limits. Last error: ${lastError}`
       });
     }
 
-    const data = await response.json();
-
-    // Validate structure of return data
-    if (
-      data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts[0]
-    ) {
-      const reply = data.candidates[0].content.parts[0].text;
-      return res.json({ reply });
-    } else {
-      console.error('Invalid Gemini API response structure:', JSON.stringify(data));
-      return res.status(502).json({
-        error: 'Received an invalid or empty response from the AI model service.'
-      });
-    }
+    const reply = responseData.candidates[0].content.parts[0].text;
+    return res.json({ reply });
   } catch (error) {
     console.error('Error handling chat API request:', error);
     if (error.name === 'AbortError') {
