@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Buddy - Futuristic Academic Assistant</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="AI Study Buddy is an interactive academic assistant for computer science and engineering students, powered by Gemini AI. Get expert help with Python, DBMS, OS, Networks, and Data Structures.">
+  <meta name="keywords" content="AI, Study Buddy, Computer Science, Engineering, Python, DBMS, Operating Systems, Networks, Data Structures">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-area">
+          <div class="logo-icon-wrapper">
+            <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#00f2fe"/>
+                  <stop offset="1" stop-color="#00f5a0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="logo-text">AI Study <span class="accent-text">Buddy</span></span>
+        </div>
+        <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li>
+            <a href="#" class="nav-item active" id="navChat">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <span>Dashboard Chat</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" id="navSubjects">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span>Subjects Info</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" id="navHistory">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>Session Logs</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" id="navTips">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              <span>Exam Tips</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-section-title">Subject Shortcuts</div>
+        <ul class="subject-shortcuts">
+          <li>
+            <button class="shortcut-btn" data-subject="python">
+              <span class="shortcut-dot python"></span>
+              <span>Python Programming</span>
+            </button>
+          </li>
+          <li>
+            <button class="shortcut-btn" data-subject="dbms">
+              <span class="shortcut-dot dbms"></span>
+              <span>DBMS & SQL</span>
+            </button>
+          </li>
+          <li>
+            <button class="shortcut-btn" data-subject="os">
+              <span class="shortcut-dot os"></span>
+              <span>Operating Systems</span>
+            </button>
+          </li>
+          <li>
+            <button class="shortcut-btn" data-subject="networks">
+              <span class="shortcut-dot networks"></span>
+              <span>Computer Networks</span>
+            </button>
+          </li>
+          <li>
+            <button class="shortcut-btn" data-subject="dsa">
+              <span class="shortcut-dot dsa"></span>
+              <span>Data Structures (DSA)</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="footer-status">
+          <div class="pulse-dot"></div>
+          <span>Powered by Gemini AI</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="Open menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div class="current-view-title" id="currentViewTitle">Academic Dashboard</div>
+        </div>
+        <div class="header-right">
+          <div class="connection-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">Gemini 2.5 Flash Connected</span>
+          </div>
+          <button class="action-icon-btn" id="clearChatBtnTop" title="Clear Chat Session" aria-label="Clear chat">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Container -->
+      <div class="content-body" id="contentBody">
+        
+        <!-- View 1: Chat Dashboard (Default) -->
+        <section class="view-panel active-panel" id="viewChat">
+          
+          <!-- Welcome Hero Section -->
+          <div class="hero-section" id="heroSection">
+            <div class="hero-glow-layer"></div>
+            <div class="hero-content">
+              <div class="orb-container">
+                <div class="glowing-orb">
+                  <div class="orb-core"></div>
+                  <div class="orb-ring ring-1"></div>
+                  <div class="orb-ring ring-2"></div>
+                </div>
+              </div>
+              
+              <h1 class="hero-title">AI Study Buddy</h1>
+              <p class="hero-tagline">Your futuristic AI companion for core engineering subjects</p>
+              
+              <div class="subject-badges">
+                <span class="badge badge-python">Python</span>
+                <span class="badge badge-dbms">DBMS</span>
+                <span class="badge badge-os">Operating Systems</span>
+                <span class="badge badge-networks">Networks</span>
+                <span class="badge badge-dsa">Data Structures</span>
+              </div>
+
+              <div class="hero-actions">
+                <button class="primary-glow-btn" id="heroStartBtn">
+                  <span>Start Asking Questions</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subject Cards Grid (Quick Filters / Actions) -->
+          <div class="subject-grid-container" id="subjectGridContainer">
+            <h2 class="section-subtitle text-center">Select a Subject to Explore</h2>
+            <div class="subjects-grid">
+              
+              <div class="subject-card" data-subject="python">
+                <div class="card-glow"></div>
+                <div class="card-icon python-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+                </div>
+                <h3 class="card-title">Python Programming</h3>
+                <p class="card-desc">Debug syntax, understand Object-Oriented Programming (OOP), libraries, and coding challenges.</p>
+                <div class="card-action">
+                  <span>Explore Concepts</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+              <div class="subject-card" data-subject="dbms">
+                <div class="card-glow"></div>
+                <div class="card-icon dbms-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>
+                </div>
+                <h3 class="card-title">DBMS & SQL</h3>
+                <p class="card-desc">Master database concepts, relational algebra, SQL queries, indexing, and Normalization models.</p>
+                <div class="card-action">
+                  <span>Explore Concepts</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+              <div class="subject-card" data-subject="os">
+                <div class="card-glow"></div>
+                <div class="card-icon os-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </div>
+                <h3 class="card-title">Operating Systems</h3>
+                <p class="card-desc">Demystify process scheduling, memory virtualization, deadlocks, semaphore flags, and file systems.</p>
+                <div class="card-action">
+                  <span>Explore Concepts</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+              <div class="subject-card" data-subject="networks">
+                <div class="card-glow"></div>
+                <div class="card-icon networks-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M12 8v8M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path></svg>
+                </div>
+                <h3 class="card-title">Computer Networks</h3>
+                <p class="card-desc">Understand OSI reference model, TCP/IP handshakes, routing tables, and IP subnet protocols.</p>
+                <div class="card-action">
+                  <span>Explore Concepts</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+              <div class="subject-card" data-subject="dsa">
+                <div class="card-glow"></div>
+                <div class="card-icon dsa-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12M6 21h12M12 3v18M6 12h12"></path></svg>
+                </div>
+                <h3 class="card-title">Data Structures (DSA)</h3>
+                <p class="card-desc">Analyze complexity, write search & sort algorithms, structures (Linked Lists, Binary Trees, Graphs).</p>
+                <div class="card-action">
+                  <span>Explore Concepts</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Chat Window Interface -->
+          <div class="chat-container glass-panel" id="chatContainer">
+            <!-- Active Subject Status Bar -->
+            <div class="chat-panel-header">
+              <div class="buddy-status">
+                <div class="status-indicator active-pulse"></div>
+                <div class="status-details">
+                  <span class="status-name" id="currentAssistantName">Academic Buddy</span>
+                  <span class="status-subject-label" id="currentSubjectLabel">General Engineering Mode</span>
+                </div>
+              </div>
+              <div class="panel-header-actions">
+                <button class="clear-session-btn" id="clearChatBtn" title="Reset Current Chat">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  <span>Clear Conversation</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Messages Window -->
+            <div class="messages-window" id="messagesWindow">
+              <!-- Empty state view with suggestions -->
+              <div class="chat-empty-state" id="chatEmptyState">
+                <div class="empty-icon-pulse">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <h3>Let's Study Together!</h3>
+                <p>Choose an example prompt below or type your own question to start revising engineering concepts.</p>
+                
+                <div class="suggestions-section">
+                  <div class="suggestions-grid" id="suggestionsGrid">
+                    <!-- Standard suggestions will be inserted here dynamically -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Message list container -->
+              <div class="messages-list" id="messagesList"></div>
+              
+              <!-- Typing Indicator -->
+              <div class="typing-indicator-wrapper" id="typingIndicator">
+                <div class="typing-avatar">AI</div>
+                <div class="typing-indicator-bubble">
+                  <div class="typing-dot"></div>
+                  <div class="typing-dot"></div>
+                  <div class="typing-dot"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Input form -->
+            <div class="chat-input-bar">
+              <div class="input-glow-bg"></div>
+              <div class="input-wrapper">
+                <textarea 
+                  class="chat-textarea" 
+                  id="chatInput" 
+                  placeholder="Ask about Python, DBMS, OS, Networks, or Data Structures..." 
+                  rows="1" 
+                  maxlength="2000"
+                  aria-label="Student Question"
+                ></textarea>
+                <div class="input-counter" id="charCounter">0/2000</div>
+                <button class="send-message-btn" id="sendMsgBtn" aria-label="Send message" disabled>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- View 2: Subjects Detailed Reference -->
+        <section class="view-panel" id="viewSubjects">
+          <div class="panel-card glass-panel">
+            <h2 class="panel-card-title">Subject Specializations</h2>
+            <p class="panel-card-desc">AI Study Buddy contains custom prompts and fine-tuned knowledge to assist you across these 5 foundational areas:</p>
+            
+            <div class="subject-details-list">
+              <div class="detail-item border-python">
+                <div class="detail-header">
+                  <span class="detail-title text-python">Python Programming</span>
+                  <span class="detail-badge py-badge">Language Core</span>
+                </div>
+                <div class="detail-content">
+                  <p>Covers variable types, loop controls, standard libraries, object-oriented principles (Inheritance, Polymorphism, Encapsulation), basic data parsing, exception handling, and writing functional scripts.</p>
+                  <strong class="topics-heading">Key Topics:</strong>
+                  <div class="topic-tags">
+                    <span>Syntax Basics</span><span>List Comprehensions</span><span>OOP Methods</span><span>File Operations</span><span>Modules</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item border-dbms">
+                <div class="detail-header">
+                  <span class="detail-title text-dbms">Database Management Systems</span>
+                  <span class="detail-badge db-badge">Data Systems</span>
+                </div>
+                <div class="detail-content">
+                  <p>Covers database design rules, SQL query scripting (SELECT, JOINS, GROUP BY, subqueries), transaction cycles, concurrency management protocols (2PL, Timestamps), indexing, and Normalization levels (1NF, 2NF, 3NF, BCNF).</p>
+                  <strong class="topics-heading">Key Topics:</strong>
+                  <div class="topic-tags">
+                    <span>SQL Queries</span><span>Joins & Subqueries</span><span>Normalization (1NF-BCNF)</span><span>ACID Properties</span><span>Transactions</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item border-os">
+                <div class="detail-header">
+                  <span class="detail-title text-os">Operating Systems</span>
+                  <span class="detail-badge os-badge">Core Engine</span>
+                </div>
+                <div class="detail-content">
+                  <p>Covers system kernel architecture, multitasking processes, CPU scheduling algorithms (FIFO, SJF, Round Robin), synchronization issues (semaphores, mutexes), deadlock states, paging memory, and disk system file layers.</p>
+                  <strong class="topics-heading">Key Topics:</strong>
+                  <div class="topic-tags">
+                    <span>Process States</span><span>CPU Scheduling</span><span>Semaphores & Mutex</span><span>Deadlock Avoidance</span><span>Paging & Virtual Memory</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item border-networks">
+                <div class="detail-header">
+                  <span class="detail-title text-networks">Computer Networks</span>
+                  <span class="detail-badge net-badge">Connectivity</span>
+                </div>
+                <div class="detail-content">
+                  <p>Covers layer architectures (OSI & TCP/IP models), data routing algorithms, packet structures, reliable TCP socket connections, UDP streams, IP network masks, DNS server operations, and transport layer handshakes.</p>
+                  <strong class="topics-heading">Key Topics:</strong>
+                  <div class="topic-tags">
+                    <span>OSI 7-Layers</span><span>TCP 3-Way Handshake</span><span>Subnetting & CIDR</span><span>Routing Protocols</span><span>DNS & HTTP</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item border-dsa">
+                <div class="detail-header">
+                  <span class="detail-title text-dsa">Data Structures & Algorithms</span>
+                  <span class="detail-badge dsa-badge">Logic Core</span>
+                </div>
+                <div class="detail-content">
+                  <p>Covers asymptotic complexity notations (Big O), core structures (Arrays, Singly/Doubly Linked Lists, Stacks, Queues, Binary Trees, AVL Trees, Graphs), search methods (Binary Search, DFS, BFS), and sorting techniques.</p>
+                  <strong class="topics-heading">Key Topics:</strong>
+                  <div class="topic-tags">
+                    <span>Big O Complexity</span><span>Linked Lists & Trees</span><span>Graph Traversals</span><span>Sorting Algorithms</span><span>Binary Search</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- View 3: Chat History & Log Manager -->
+        <section class="view-panel" id="viewHistory">
+          <div class="panel-card glass-panel">
+            <h2 class="panel-card-title">Stored Sessions</h2>
+            <p class="panel-card-desc">Review your persistent chat logs stored in your browser's local memory. You can inspect messages, restore sessions, or erase storage cache.</p>
+            
+            <div class="history-stats">
+              <div class="stat-card">
+                <span class="stat-value" id="statsTotalMessages">0</span>
+                <span class="stat-label">Total Messages</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value" id="statsSavedSessions">0</span>
+                <span class="stat-label">Conversations Saved</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value" id="statsLastActive">Never</span>
+                <span class="stat-label">Last Active Session</span>
+              </div>
+            </div>
+
+            <div class="history-controls-card">
+              <h3>Database Settings</h3>
+              <p>Wiping the chat log history completely resets local memory cache. This operation is permanent.</p>
+              <button class="danger-glow-btn" id="historyResetBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>Reset Chat & Wipe LocalStorage</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- View 4: Quick Exam Tips & Guidance -->
+        <section class="view-panel" id="viewTips">
+          <div class="panel-card glass-panel">
+            <h2 class="panel-card-title">Engineering Exam Preparation Tips</h2>
+            <p class="panel-card-desc">Useful strategies compiled by academic experts to help you score high on computer science and engineering examinations:</p>
+
+            <div class="tips-grid">
+              <div class="tip-card">
+                <div class="tip-num">01</div>
+                <h3>Trace Your Algorithms Step-by-Step</h3>
+                <p>When writing data structure solutions on exam paper, always include a dry run table. Illustrate array indices, pointer changes, or stack contents stage-by-stage to demonstrate clear understanding.</p>
+              </div>
+
+              <div class="tip-card">
+                <div class="tip-num">02</div>
+                <h3>Normal Form Transitions</h3>
+                <p>In DBMS questions, don't just state the final normal form. Write down the functional dependencies (FDs), highlight partial or transitive dependencies, and clearly demonstrate how you decompose relations.</p>
+              </div>
+
+              <div class="tip-card">
+                <div class="tip-num">03</div>
+                <h3>Standard OSI Layer Table</h3>
+                <p>For Networking exams, memorize layer numbers, data units (segments, packets, frames), and hardware components. Drawing a quick summary matrix on your answer sheet is highly scored.</p>
+              </div>
+
+              <div class="tip-card">
+                <div class="tip-num">04</div>
+                <h3>Process Gantt Charts</h3>
+                <p>In OS scheduling problems (SJF, Round Robin, Priority), always sketch a clear Gantt chart beginning at time = 0. Show context switch overlaps and write down calculations for turnaround and waiting time.</p>
+              </div>
+
+              <div class="tip-card">
+                <div class="tip-num">05</div>
+                <h3>Write Clean Pseudo-code</h3>
+                <p>If asked for code, write syntactic Python or standard pseudocode. Indent properly, name variables meaningfully, and add concise comments explaining the time and space complexity in Big O notation.</p>
+              </div>
+
+              <div class="tip-card">
+                <div class="tip-num">06</div>
+                <h3>Ask AI Study Buddy</h3>
+                <p>Use the chat companion to review definitions, explain confusing code behaviors, compare concepts (like mutex vs semaphore), or generate quick summaries before walking into the examination hall!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <h3>Clear Conversation History?</h3>
+      </div>
+      <div class="modal-body">
+        <p>This action will permanently delete all messages in this conversation session from your browser's local memory. You cannot recover these logs.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" id="confirmCancelBtn">Cancel</button>
+        <button class="danger-btn" id="confirmOkBtn">Yes, Clear History</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
