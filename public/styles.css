@@ -990,6 +990,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0; /* Prevent flexbox overflow and force word wrapping */
 }
 
 .bubble-content {
