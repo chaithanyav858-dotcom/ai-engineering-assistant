@@ -1838,15 +1838,19 @@ html, body {
 
   /* Fullscreen Chat Layout Overhaul */
   .content-body {
-    padding: 0;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Lock outer container scroll */
+    overflow-y: auto; /* Let landing and reference views scroll normally by default */
+  }
+
+  .content-body.chat-active {
+    padding: 0;
+    overflow: hidden; /* Lock outer container scroll when chat is active */
   }
 
   .view-panel {
-    height: 100%;
-    overflow-y: auto;
+    width: 100%;
     display: none;
     flex-direction: column;
   }
@@ -1855,8 +1859,10 @@ html, body {
     display: flex;
   }
 
-  #viewChat {
-    overflow: hidden; /* Lock inner viewport scroll for chat */
+  /* Stretch chat panel to full height when active */
+  .content-body.chat-active #viewChat {
+    height: 100%;
+    overflow: hidden;
   }
 
   .chat-container {

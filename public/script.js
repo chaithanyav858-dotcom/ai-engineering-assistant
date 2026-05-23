@@ -135,10 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection.style.display = 'none';
     subjectGridContainer.style.display = 'none';
     chatEmptyState.style.display = 'none';
+    contentBody.classList.add('chat-active');
     renderAllMessages();
     scrollToLatestMessage();
   } else {
     chatContainer.style.display = 'none';
+    contentBody.classList.remove('chat-active');
   }
 });
 
@@ -238,12 +240,16 @@ function setupEventListeners() {
           chatContainer.style.display = 'flex';
           heroSection.style.display = 'none';
           subjectGridContainer.style.display = 'none';
+          contentBody.classList.add('chat-active');
           scrollToLatestMessage();
         } else {
           chatContainer.style.display = 'none';
           heroSection.style.display = 'block';
           subjectGridContainer.style.display = 'block';
+          contentBody.classList.remove('chat-active');
         }
+      } else {
+        contentBody.classList.remove('chat-active');
       }
     });
   });
@@ -272,6 +278,7 @@ function setupEventListeners() {
       heroSection.style.display = 'none';
       subjectGridContainer.style.display = 'none';
       chatContainer.style.display = 'flex';
+      contentBody.classList.add('chat-active');
       
       // Focus input
       chatInput.focus();
@@ -284,6 +291,7 @@ function setupEventListeners() {
     heroSection.style.display = 'none';
     subjectGridContainer.style.display = 'none';
     chatContainer.style.display = 'flex';
+    contentBody.classList.add('chat-active');
     chatInput.focus();
   });
 
@@ -620,6 +628,7 @@ function clearAllHistory() {
   chatContainer.style.display = 'none';
   heroSection.style.display = 'block';
   subjectGridContainer.style.display = 'block';
+  contentBody.classList.remove('chat-active');
 }
 
 // ----------------------------------------------------
