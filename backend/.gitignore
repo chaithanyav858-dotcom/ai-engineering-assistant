@@ -1,26 +1,20 @@
-# Local Environment Variables
+# Local environment variable overrides
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Dependencies
+# Dependency directories
 node_modules/
+jspm_packages/
 
-# Build Output
-dist/
-build/
-
-# Logs
-logs
-*.log
+# Debug logs
 npm-debug.log*
-
-# Scratch Files
-scratch/
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # OS Files
 .DS_Store
 Thumbs.db
-

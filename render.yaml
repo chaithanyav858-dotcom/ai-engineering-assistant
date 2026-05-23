@@ -1,10 +1,15 @@
 services:
   - type: web
-    name: ai-study-buddy
+    name: ai-study-buddy-backend
     env: node
     plan: starter
+    rootDir: backend
     buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: GEMINI_API_KEY
-        sync: false # User will input this manually in Render dashboard
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        sync: false

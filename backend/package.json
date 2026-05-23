@@ -1,7 +1,7 @@
 {
-  "name": "ai-study-buddy",
+  "name": "ai-study-buddy-backend",
   "version": "1.0.0",
-  "description": "Futuristic AI learning companion for engineering students, powered by Gemini API",
+  "description": "Backend API server for AI Study Buddy, powered by Gemini API",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -9,15 +9,14 @@
     "dev": "node server.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2"
   },
   "keywords": [
-    "ai",
+    "express",
     "gemini",
-    "study-buddy",
-    "education",
-    "engineering"
+    "api"
   ],
   "author": "Antigravity",
   "license": "ISC"

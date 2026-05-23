@@ -1,3 +1,6 @@
+// Dynamically load API Base URL from Vite Env Variables
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 // AI Study Buddy - Frontend Controller
 // Core Logic, Markdown Parsing, State Management, Local Storage
 
@@ -521,7 +524,7 @@ async function sendMessage() {
     }));
 
     // 6. Fetch call to server API
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${API_BASE_URL}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

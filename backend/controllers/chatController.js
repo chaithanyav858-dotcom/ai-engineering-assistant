@@ -1,28 +1,3 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Load environment variables from .env file
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Resolve paths for ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Middleware
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Verify Gemini API Key exists
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-if (!GEMINI_API_KEY || GEMINI_API_KEY === 'your_gemini_api_key_here') {
-  console.warn('\x1b[33m%s\x1b[0m', 'WARNING: GEMINI_API_KEY is not set or is using the placeholder. Please configure it in your .env file.');
-}
-
 // System instructions for the AI Study Buddy
 const SYSTEM_INSTRUCTION = `You are AI Study Buddy, a helpful, highly intelligent, and engaging academic assistant for engineering and computer science students.
 You specialize in five core subjects:
@@ -45,26 +20,25 @@ Your style guidelines:
 - IMPORTANT: If the user asks something completely unrelated to academic engineering, computer science, or general science topics (e.g., pop culture, planning a vacation, creative fiction writing), politely but humorously guide them back to engineering study-related help.
 - Do not make up facts. If you do not know, politely state so.`;
 
-// Chat API endpoint
-app.post('/api/chat', async (req, res) => {
+// POST /api/chat controller
+export const handleChat = async (req, res) => {
   const { message, history } = req.body;
+  const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
   // 1. Validation
   if (!message || typeof message !== 'string' || message.trim() === '') {
     return res.status(400).json({ error: 'Message cannot be empty.' });
   }
 
-  // 2. Check API Key
+  // 2. Check API Key configuration
   if (!GEMINI_API_KEY || GEMINI_API_KEY === 'your_gemini_api_key_here') {
     return res.status(500).json({
-      error: 'Gemini API Key is not configured on the server. Please check your backend configuration and add GEMINI_API_KEY to the .env file.'
+      error: 'Gemini API Key is not configured on the server. Please check your backend configuration and add GEMINI_API_KEY.'
     });
   }
 
   try {
-    // 3. Format history for Gemini API
-    // Gemini expects role: 'user' and role: 'model' (which corresponds to 'assistant')
-    // and content structured as { role: string, parts: [{ text: string }] }
+    // 3. Format history for Gemini API (user & model roles)
     const contents = [];
 
     if (Array.isArray(history)) {
@@ -78,13 +52,13 @@ app.post('/api/chat', async (req, res) => {
       });
     }
 
-    // Append current user message
+    // Append the current user question
     contents.push({
       role: 'user',
       parts: [{ text: message }]
     });
 
-    // 4. Construct Gemini API Request Body
+    // 4. Construct Gemini request structure
     const requestBody = {
       contents,
       systemInstruction: {
@@ -98,7 +72,7 @@ app.post('/api/chat', async (req, res) => {
       }
     };
 
-    // 5. Send POST request to Gemini Endpoint with fallback support
+    // 5. Send POST request with fallback model list to handle high demand or rate limits
     const models = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
     let lastError = null;
     let responseData = null;
@@ -106,10 +80,10 @@ app.post('/api/chat', async (req, res) => {
 
     for (const model of models) {
       try {
-        console.log(`Attempting Gemini API request using model: ${model}`);
+        console.log(`[API] Attempting model: ${model}`);
         const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
         
-        // Set a timeout of 20 seconds for safety
+        // Timeout of 20 seconds
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 20000);
 
@@ -126,11 +100,9 @@ app.post('/api/chat', async (req, res) => {
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          console.warn(`Gemini API Error for model ${model}:`, errorData);
-          lastError = errorData.error?.message || `Gemini API returned status code ${response.status}.`;
-          
-          // Try the next fallback model in the list
-          continue;
+          console.warn(`[API] Model ${model} failed with response:`, errorData);
+          lastError = errorData.error?.message || `Status code ${response.status}`;
+          continue; // Try next model
         }
 
         const data = await response.json();
@@ -145,38 +117,29 @@ app.post('/api/chat', async (req, res) => {
         ) {
           responseData = data;
           successfulModel = model;
-          console.log(`Successfully generated response using model: ${model}`);
-          break; // Break the loop on success
+          console.log(`[API] Model ${model} succeeded!`);
+          break; // Exit loop on success
         } else {
-          console.warn(`Invalid Gemini API response structure for model ${model}:`, JSON.stringify(data));
-          lastError = 'Received an invalid or empty response from the AI model service.';
+          console.warn(`[API] Invalid response schema for model ${model}:`, JSON.stringify(data));
+          lastError = 'Invalid Gemini API response schema structure.';
         }
       } catch (err) {
-        console.error(`Fetch error during model ${model} execution:`, err);
+        console.error(`[API] Fetch error for model ${model}:`, err);
         lastError = err.message || err;
       }
     }
 
     if (!responseData) {
       return res.status(503).json({
-        error: `All generative models failed due to high demand or API rate limits. Last error: ${lastError}`
+        error: `All AI models are currently experiencing high demand. Please try again in a few seconds. Last error: ${lastError}`
       });
     }
 
     const reply = responseData.candidates[0].content.parts[0].text;
-    return res.json({ reply });
+    return res.json({ reply, model: successfulModel });
+
   } catch (error) {
-    console.error('Error handling chat API request:', error);
-    if (error.name === 'AbortError') {
-      return res.status(504).json({ error: 'The request to Gemini API timed out. Please try again.' });
-    }
+    console.error('[CONTROLLER] Internal server error handling chat:', error);
     return res.status(500).json({ error: 'An unexpected internal server error occurred while processing your request.' });
   }
-});
-
-// Start Server
-app.listen(PORT, () => {
-  console.log('\x1b[32m%s\x1b[0m', `AI Study Buddy server running successfully!`);
-  console.log(`- Local Access: http://localhost:${PORT}`);
-  console.log(`- Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+};
