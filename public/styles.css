@@ -1666,33 +1666,114 @@ html, body {
 }
 
 @media (max-width: 768px) {
+  /* Premium backdrop overlay when menu is open */
+  .app-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(3, 7, 18, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .app-container:has(.sidebar.mobile-open)::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   /* Mobile Sidebar behavior: Collapsed by default */
   .sidebar {
     position: fixed;
     left: 0;
     top: 0;
     transform: translateX(-100%);
+    z-index: 100;
   }
   
   .sidebar.mobile-open {
     transform: translateX(0);
     width: 280px;
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.6);
   }
   
   .mobile-close-btn {
     display: block;
   }
   
+  /* Menu toggle button styled as a dashboard grid in the top left corner */
   .mobile-toggle-btn {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .mobile-toggle-btn:active {
+    background: rgba(255, 255, 255, 0.1);
   }
   
   .main-header {
-    padding: 0 20px;
+    padding: 0 16px;
+    height: 64px;
+  }
+
+  .connection-status {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+  .connection-status span:last-child {
+    display: none; /* Hide 'Connected' suffix to save space */
+  }
+  
+  /* Lock outer scroll when chat is active to prevent elastic bounce/scrolling to empty space */
+  .content-body:has(#chatContainer:not([style*="display: none"])) {
+    overflow: hidden !important;
+    padding: 12px !important;
+    height: calc(100% - 64px) !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-body:has(#chatContainer:not([style*="display: none"])) #viewChat {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .content-body:has(#chatContainer:not([style*="display: none"])) .chat-container {
+    height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  /* Smooth momentum scrolling for iOS */
+  .messages-window {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Set input font-size to 16px to prevent iOS Safari auto-zoom behavior */
+  .chat-textarea {
+    font-size: 16px !important;
   }
   
   .hero-section {
-    padding: 32px 20px;
+    padding: 32px 16px;
   }
   
   .hero-title {
