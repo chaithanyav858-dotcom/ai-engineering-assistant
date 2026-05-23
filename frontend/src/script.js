@@ -1,7 +1,7 @@
 // Dynamically load API Base URL from Vite Env Variables
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-// AI Study Buddy - Frontend Controller
+// Nexora AI - Frontend Controller
 // Core Logic, Markdown Parsing, State Management, Local Storage
 
 // ----------------------------------------------------
@@ -149,12 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // 4. Local Storage & Stats Management
 // ----------------------------------------------------
 function saveChatHistoryToStorage() {
-  localStorage.setItem('ai_study_buddy_history', JSON.stringify(chatHistory));
+  localStorage.setItem('nexora_ai_history', JSON.stringify(chatHistory));
   updateUIForHistory();
 }
 
 function loadChatHistoryFromStorage() {
-  const data = localStorage.getItem('ai_study_buddy_history');
+  const data = localStorage.getItem('nexora_ai_history');
   if (data) {
     try {
       chatHistory = JSON.parse(data);
@@ -370,7 +370,7 @@ function selectSubject(subjectKey) {
     indicator.style.backgroundColor = `var(--color-${subjectKey})`;
     indicator.style.boxShadow = `0 0 10px var(--color-${subjectKey})`;
   } else {
-    currentAssistantName.textContent = 'Academic Buddy';
+    currentAssistantName.textContent = 'Nexora AI';
     currentSubjectLabel.textContent = 'General Engineering Mode';
     
     const indicator = document.querySelector('.buddy-status .status-indicator');

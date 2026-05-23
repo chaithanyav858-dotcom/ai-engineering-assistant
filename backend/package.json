@@ -1,7 +1,7 @@
 {
   "name": "ai-study-buddy-backend",
   "version": "1.0.0",
-  "description": "Backend API server for AI Study Buddy, powered by Gemini API",
+  "description": "Backend API server for Nexora AI, powered by Gemini API",
   "main": "server.js",
   "type": "module",
   "scripts": {

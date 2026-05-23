@@ -47,11 +47,11 @@ app.get('/health', (req, res) => {
 
 // Default catch-all for API base
 app.get('/', (req, res) => {
-  res.send('AI Study Buddy API Backend is running. Access health at /health.');
+  res.send('Nexora AI API Backend is running. Access health at /health.');
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`[SERVER] AI Study Buddy backend running on port ${PORT}`);
+  console.log(`[SERVER] Nexora AI backend running on port ${PORT}`);
   console.log(`[SERVER] Allowed Origins:`, allowedOrigins);
 });

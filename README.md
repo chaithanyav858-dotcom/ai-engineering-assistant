@@ -1,6 +1,6 @@
-# AI Study Buddy - Academic Companion for Engineering Students (Decoupled)
+# Nexora AI - Academic Companion for Engineering Students (Decoupled)
 
-AI Study Buddy is a full-stack, highly interactive, and responsive web application designed to assist computer science and engineering students in learning, debugging, and revising core concepts. The application features a premium, dark glassmorphism dashboard UI with neon glow accents and is powered by the **Google Gemini API** with a resilient model fallback system.
+Nexora AI is a full-stack, highly interactive, and responsive web application designed to assist computer science and engineering students in learning, debugging, and revising core concepts. The application features a premium, dark glassmorphism dashboard UI with neon glow accents and is powered by the **Google Gemini API** with a resilient model fallback system.
 
 This codebase has been restructured into a decoupled architecture separating the client (Vite-powered frontend) and the server (Express Node.js backend). This allows for faster frontend load times, bypasses Render cold starts for static files, and separates the presentation layer from backend logic.
 
