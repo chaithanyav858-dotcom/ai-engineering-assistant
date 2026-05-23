@@ -1666,6 +1666,10 @@ html, body {
 }
 
 @media (max-width: 768px) {
+  .app-container {
+    display: block;
+  }
+
   /* Premium backdrop overlay when menu is open */
   .app-container::before {
     content: '';
