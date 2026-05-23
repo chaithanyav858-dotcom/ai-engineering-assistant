@@ -1680,6 +1680,11 @@ html, body {
     display: block !important;
   }
 
+  /* Disable heavy CPU/GPU blur animations on mobile to eliminate lag */
+  .ambient-glow {
+    display: none !important;
+  }
+
   .main-content {
     width: 100% !important;
     max-width: 100% !important;
@@ -1774,7 +1779,7 @@ html, body {
   }
   
   /* Lock outer scroll when chat is active to prevent elastic bounce/scrolling to empty space */
-  .content-body:has(#chatContainer:not([style*="display: none"])) {
+  .content-body:has(#viewChat.active-panel #chatContainer:not([style*="display: none"])) {
     overflow: hidden !important;
     padding: 12px !important;
     height: calc(100% - 64px) !important;
@@ -1782,13 +1787,13 @@ html, body {
     flex-direction: column;
   }
 
-  .content-body:has(#chatContainer:not([style*="display: none"])) #viewChat {
+  .content-body:has(#viewChat.active-panel #chatContainer:not([style*="display: none"])) #viewChat {
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
   }
 
-  .content-body:has(#chatContainer:not([style*="display: none"])) .chat-container {
+  .content-body:has(#viewChat.active-panel #chatContainer:not([style*="display: none"])) .chat-container {
     height: 100% !important;
     max-height: none !important;
     margin: 0 !important;
