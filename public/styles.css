@@ -1653,83 +1653,6 @@ html, body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Mobile Subject Pill Selector */
-.mobile-subject-selector {
-  display: none; /* Hidden on desktop */
-  gap: 8px;
-  padding: 12px 16px;
-  background: rgba(3, 7, 18, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  z-index: 10;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.mobile-subject-selector::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.mobile-subject-selector {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.mobile-pill {
-  display: inline-block;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  color: var(--text-secondary);
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-pill:active {
-  transform: scale(0.95);
-}
-
-.mobile-pill.active-pill {
-  color: #030712;
-  font-weight: 600;
-  border-color: transparent;
-}
-
-/* Color theme mappings for active mobile pills */
-.mobile-pill.active-pill[data-subject=""] {
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
-}
-.mobile-pill.active-pill[data-subject="python"] {
-  background: var(--color-python);
-  box-shadow: 0 0 12px rgba(255, 212, 59, 0.3);
-}
-.mobile-pill.active-pill[data-subject="dbms"] {
-  background: var(--color-dbms);
-  box-shadow: 0 0 12px rgba(0, 245, 160, 0.3);
-}
-.mobile-pill.active-pill[data-subject="os"] {
-  background: var(--color-os);
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
-}
-.mobile-pill.active-pill[data-subject="networks"] {
-  background: var(--color-networks);
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(255, 91, 127, 0.3);
-}
-.mobile-pill.active-pill[data-subject="dsa"] {
-  background: var(--color-dsa);
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
-}
-
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .content-body {
@@ -1743,50 +1666,17 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  /* Ambient glow reduction for mobile performance */
-  .ambient-glow {
-    filter: blur(100px);
-    opacity: 0.15;
-  }
-  .glow-1 { width: 300px; height: 300px; }
-  .glow-2 { width: 350px; height: 350px; }
-  .glow-3 { display: none; }
-
-  /* Premium Backdrop Overlay when sidebar is open */
-  .app-container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(3, 7, 18, 0.65);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 99;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  .app-container:has(.sidebar.mobile-open)::before {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
   /* Mobile Sidebar behavior: Collapsed by default */
   .sidebar {
     position: fixed;
     left: 0;
     top: 0;
     transform: translateX(-100%);
-    z-index: 1000;
   }
   
   .sidebar.mobile-open {
     transform: translateX(0);
     width: 280px;
-    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.6);
   }
   
   .mobile-close-btn {
@@ -1798,208 +1688,45 @@ html, body {
   }
   
   .main-header {
-    padding: 0 16px;
-    height: 64px;
-  }
-
-  .connection-status {
-    padding: 4px 10px;
-  }
-  .connection-status span:last-child {
-    display: none; /* Hide label, keep indicator on small screens */
-  }
-  .connection-status::after {
-    content: 'Gemini';
-    font-size: 0.75rem;
+    padding: 0 20px;
   }
   
-  /* Landing / Hero adjustments */
   .hero-section {
-    padding: 32px 16px;
-    margin: 16px;
-    border-radius: 16px;
+    padding: 32px 20px;
   }
   
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
-
-  .hero-tagline {
-    font-size: 1rem;
-  }
-
-  .subject-grid-container {
-    padding: 0 16px 32px;
-  }
-
-  .subjects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Fullscreen Chat Layout Overhaul */
-  .content-body {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Let landing and reference views scroll normally by default */
-  }
-
-  .content-body.chat-active {
-    padding: 0;
-    overflow: hidden; /* Lock outer container scroll when chat is active */
-  }
-
-  .view-panel {
-    width: 100%;
-    display: none;
-    flex-direction: column;
-  }
-
-  .view-panel.active-panel {
-    display: flex;
-  }
-
-  /* Stretch chat panel to full height when active */
-  .content-body.chat-active #viewChat {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .chat-container {
-    flex: 1;
-    height: 100%;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-    box-shadow: none;
-  }
-
-  .mobile-subject-selector {
-    display: flex; /* Show pill navigation bar */
-  }
-
-  /* Chat Messages & Bubbles Mobile Tweaks */
-  .messages-window {
-    padding: 16px 12px;
-  }
-
-  .message-bubble {
-    max-width: 95%;
-    gap: 10px;
-  }
-
-  .bubble-avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 0.7rem;
-  }
-
-  .bubble-content {
-    padding: 10px 14px;
-    font-size: 0.9rem;
-  }
-
-  .bubble-content pre {
-    padding: 12px;
-  }
-
-  .bubble-content code {
-    font-size: 0.82rem;
-  }
-
-  /* Prevent iOS zoom on input focus by setting font size to 16px */
-  .chat-textarea {
-    font-size: 16px;
-    padding: 8px 0;
-  }
-
-  .chat-input-bar {
-    padding: 12px;
-    background: rgba(3, 7, 18, 0.9);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .input-wrapper {
-    padding: 6px 12px;
-    border-radius: 20px;
-  }
-
-  .send-message-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
-
-  /* Panels (Stats/Tips/Reference) Card Adjustments */
-  .panel-card {
-    margin: 16px;
-    padding: 24px 16px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-
-  .panel-card-title {
-    font-size: 1.5rem;
-  }
-
-  .panel-card-desc {
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-  }
-
-  .detail-item {
-    padding: 16px;
-  }
-
-  .detail-title {
-    font-size: 1.1rem;
-  }
-
+  
   .tips-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-
-  .tip-card {
-    padding: 20px 16px;
+  
+  .message-bubble {
+    max-width: 92%;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 1.8rem;
+  .content-body {
+    padding: 16px;
   }
   
   .suggestions-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
   }
-
-  .suggestion-chip {
-    padding: 10px 12px;
-    font-size: 0.78rem;
-  }
-
+  
   .chat-panel-header {
-    padding: 10px 12px;
+    padding: 12px 16px;
   }
-
-  .status-name {
-    font-size: 0.85rem;
+  
+  .messages-window {
+    padding: 16px;
   }
-
-  .status-subject-label {
-    font-size: 0.7rem;
-  }
-
-  .clear-session-btn span {
-    display: none; /* Icon only on small screens to save space */
-  }
-
-  .clear-session-btn {
-    padding: 6px;
-    border-radius: 50%;
+  
+  .chat-input-bar {
+    padding: 12px 16px 16px;
   }
 }

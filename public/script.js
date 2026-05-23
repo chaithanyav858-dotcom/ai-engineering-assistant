@@ -135,12 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSection.style.display = 'none';
     subjectGridContainer.style.display = 'none';
     chatEmptyState.style.display = 'none';
-    contentBody.classList.add('chat-active');
     renderAllMessages();
     scrollToLatestMessage();
   } else {
     chatContainer.style.display = 'none';
-    contentBody.classList.remove('chat-active');
   }
 });
 
@@ -240,16 +238,12 @@ function setupEventListeners() {
           chatContainer.style.display = 'flex';
           heroSection.style.display = 'none';
           subjectGridContainer.style.display = 'none';
-          contentBody.classList.add('chat-active');
           scrollToLatestMessage();
         } else {
           chatContainer.style.display = 'none';
           heroSection.style.display = 'block';
           subjectGridContainer.style.display = 'block';
-          contentBody.classList.remove('chat-active');
         }
-      } else {
-        contentBody.classList.remove('chat-active');
       }
     });
   });
@@ -278,7 +272,6 @@ function setupEventListeners() {
       heroSection.style.display = 'none';
       subjectGridContainer.style.display = 'none';
       chatContainer.style.display = 'flex';
-      contentBody.classList.add('chat-active');
       
       // Focus input
       chatInput.focus();
@@ -291,7 +284,6 @@ function setupEventListeners() {
     heroSection.style.display = 'none';
     subjectGridContainer.style.display = 'none';
     chatContainer.style.display = 'flex';
-    contentBody.classList.add('chat-active');
     chatInput.focus();
   });
 
@@ -349,17 +341,6 @@ function setupEventListeners() {
       openConfirmModal();
     });
   }
-
-  // Mobile subject selector pills click bindings
-  const mobilePills = document.querySelectorAll('.mobile-pill');
-  mobilePills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const subject = pill.dataset.subject || null;
-      selectSubject(subject);
-      chatInput.focus();
-      showToast(`Switched study mode to ${subject ? SUBJECT_DETAILS[subject].name : 'General Engineering'}`, 'info');
-    });
-  });
 }
 
 // ----------------------------------------------------
@@ -371,17 +352,6 @@ function selectSubject(subjectKey) {
     btn.classList.remove('active-shortcut');
     if (btn.dataset.subject === subjectKey) {
       btn.classList.add('active-shortcut');
-    }
-  });
-
-  // Update mobile subject selector pills
-  const mobilePills = document.querySelectorAll('.mobile-pill');
-  mobilePills.forEach(pill => {
-    pill.classList.remove('active-pill');
-    const pillSubject = pill.dataset.subject || null;
-    const matchSubject = subjectKey || null;
-    if (pillSubject === matchSubject) {
-      pill.classList.add('active-pill');
     }
   });
 
@@ -628,7 +598,6 @@ function clearAllHistory() {
   chatContainer.style.display = 'none';
   heroSection.style.display = 'block';
   subjectGridContainer.style.display = 'block';
-  contentBody.classList.remove('chat-active');
 }
 
 // ----------------------------------------------------
