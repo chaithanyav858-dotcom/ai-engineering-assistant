@@ -12,73 +12,73 @@ let activeSubject = null; // null means General Mode
 let isLoading = false;
 
 const SUBJECT_DETAILS = {
-  python: {
-    name: 'Python Programming',
-    assistant: 'Python Guru',
-    badgeClass: 'badge-python',
+  cse: {
+    name: 'Computer Science & IT',
+    assistant: 'CSE Professor',
+    badgeClass: 'badge-cse',
     suggestions: [
-      "Explain recursion in Python with an example",
-      "Write Python code for binary search",
-      "Explain list comprehensions vs loops in Python",
-      "What is OOP in Python? Explain inheritance with code"
+      "Explain the difference between a stack and a queue",
+      "Write Python code to find prime numbers in a range",
+      "What are functional dependencies and normalization in DBMS?",
+      "Explain the 7 layers of the OSI model"
     ]
   },
-  dbms: {
-    name: 'DBMS & SQL',
-    assistant: 'Database Expert',
-    badgeClass: 'badge-dbms',
+  ece: {
+    name: 'Electrical & Electronics',
+    assistant: 'ECE Specialist',
+    badgeClass: 'badge-ece',
     suggestions: [
-      "What is normalization in DBMS?",
-      "What is indexing in databases?",
-      "Explain Inner vs Outer Joins in SQL with examples",
-      "What are ACID properties? Explain with database transactions"
+      "Explain Kirchhoff's laws (KCL and KVL)",
+      "How does a PN junction diode work in forward bias?",
+      "Compare microprocessors and microcontrollers",
+      "Simplify a Boolean expression using Karnaugh Maps"
     ]
   },
-  os: {
-    name: 'Operating Systems',
-    assistant: 'OS Kernel Specialist',
-    badgeClass: 'badge-os',
+  mech: {
+    name: 'Mechanical Engineering',
+    assistant: 'Mechanical Expert',
+    badgeClass: 'badge-mech',
     suggestions: [
-      "Explain process scheduling in OS",
-      "Explain deadlock with a real-life example",
-      "What is virtual memory and how does paging work?",
-      "Compare Mutex and Semaphore with simple examples"
+      "Explain the First and Second Laws of Thermodynamics",
+      "What is Bernoulli's principle and its applications?",
+      "Explain Hooke's Law and the stress-strain curve",
+      "Compare Otto cycle and Diesel cycle"
     ]
   },
-  networks: {
-    name: 'Computer Networks',
-    assistant: 'Network Architect',
-    badgeClass: 'badge-networks',
+  civil: {
+    name: 'Civil Engineering',
+    assistant: 'Civil Engineer',
+    badgeClass: 'badge-civil',
     suggestions: [
-      "What is the TCP three-way handshake?",
-      "Explain the 7 layers of the OSI reference model",
-      "What is subnetting and how is a CIDR mask used?",
-      "How does DNS lookup work step by step?"
+      "What is the difference between shear force and bending moment?",
+      "Explain the components and grades of concrete",
+      "What is leveling in surveying and how is it done?",
+      "Explain Pascal's Law and its applications in civil systems"
     ]
   },
-  dsa: {
-    name: 'Data Structures (DSA)',
-    assistant: 'DSA Master',
-    badgeClass: 'badge-dsa',
+  sciences: {
+    name: 'Mathematics & Sciences',
+    assistant: 'Applied Scientist',
+    badgeClass: 'badge-sciences',
     suggestions: [
-      "Compare stack and queue data structures",
-      "Compare Binary Search Tree vs Hash Map",
-      "Explain time complexity and Big O notation",
-      "Explain Binary Search algorithm with dry-run pseudo-code"
+      "Explain double and triple integration with applications",
+      "What is the Schrodinger wave equation and its significance?",
+      "Explain the working principle of lasers and fiber optics",
+      "Explain the mechanism of metallic corrosion and its prevention"
     ]
   }
 };
 
 // General Suggestions (fallback when no specific subject is selected)
 const GENERAL_SUGGESTIONS = [
-  "Explain recursion in Python with an example",
-  "What is normalization in DBMS?",
-  "Explain process scheduling in OS",
-  "What is TCP three-way handshake?",
-  "Compare stack and queue",
-  "Write Python code for binary search",
-  "Explain deadlock with real-life example",
-  "What is indexing in databases?"
+  "Explain Kirchhoff's laws (KCL and KVL)",
+  "Explain the difference between stack and queue",
+  "Explain the First and Second Laws of Thermodynamics",
+  "What is the difference between shear force and bending moment?",
+  "Explain double and triple integration with applications",
+  "Write Python code to find prime numbers",
+  "How does a PN junction diode work?",
+  "What is Bernoulli's principle?"
 ];
 
 // ----------------------------------------------------

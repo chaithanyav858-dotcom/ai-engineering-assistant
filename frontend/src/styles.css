@@ -30,11 +30,11 @@
   --ai-bubble-border: rgba(255, 255, 255, 0.07);
   
   /* Subject Colors */
-  --color-python: #ffd43b;
-  --color-dbms: #00f5a0;
-  --color-os: #00f2fe;
-  --color-networks: #ff5b7f;
-  --color-dsa: #a855f7;
+  --color-cse: #ffd43b;
+  --color-ece: #00f5a0;
+  --color-mech: #00f2fe;
+  --color-civil: #ff5b7f;
+  --color-sciences: #a855f7;
 
   /* Typography */
   --font-sans: 'Inter', sans-serif;
@@ -282,11 +282,11 @@ html, body {
   border-radius: 50%;
 }
 
-.shortcut-dot.python { background-color: var(--color-python); box-shadow: 0 0 8px var(--color-python); }
-.shortcut-dot.dbms { background-color: var(--color-dbms); box-shadow: 0 0 8px var(--color-dbms); }
-.shortcut-dot.os { background-color: var(--color-os); box-shadow: 0 0 8px var(--color-os); }
-.shortcut-dot.networks { background-color: var(--color-networks); box-shadow: 0 0 8px var(--color-networks); }
-.shortcut-dot.dsa { background-color: var(--color-dsa); box-shadow: 0 0 8px var(--color-dsa); }
+.shortcut-dot.cse { background-color: var(--color-cse); box-shadow: 0 0 8px var(--color-cse); }
+.shortcut-dot.ece { background-color: var(--color-ece); box-shadow: 0 0 8px var(--color-ece); }
+.shortcut-dot.mech { background-color: var(--color-mech); box-shadow: 0 0 8px var(--color-mech); }
+.shortcut-dot.civil { background-color: var(--color-civil); box-shadow: 0 0 8px var(--color-civil); }
+.shortcut-dot.sciences { background-color: var(--color-sciences); box-shadow: 0 0 8px var(--color-sciences); }
 
 .sidebar-footer {
   padding: 20px 24px;
@@ -588,11 +588,11 @@ html, body {
   transition: all 0.25s ease;
 }
 
-.badge-python { color: var(--color-python); border-color: rgba(255, 212, 59, 0.2); }
-.badge-dbms { color: var(--color-dbms); border-color: rgba(0, 245, 160, 0.2); }
-.badge-os { color: var(--color-os); border-color: rgba(0, 242, 254, 0.2); }
-.badge-networks { color: var(--color-networks); border-color: rgba(255, 91, 127, 0.2); }
-.badge-dsa { color: var(--color-dsa); border-color: rgba(168, 85, 247, 0.2); }
+.badge-cse { color: var(--color-cse); border-color: rgba(255, 212, 59, 0.2); }
+.badge-ece { color: var(--color-ece); border-color: rgba(0, 245, 160, 0.2); }
+.badge-mech { color: var(--color-mech); border-color: rgba(0, 242, 254, 0.2); }
+.badge-civil { color: var(--color-civil); border-color: rgba(255, 91, 127, 0.2); }
+.badge-sciences { color: var(--color-sciences); border-color: rgba(168, 85, 247, 0.2); }
 
 .hero-actions {
   display: flex;
@@ -687,11 +687,11 @@ html, body {
   background: radial-gradient(circle, rgba(0, 242, 254, 0.25) 0%, transparent 70%);
 }
 
-.subject-card[data-subject="python"]:hover { border-color: rgba(255, 212, 59, 0.4); box-shadow: 0 15px 35px rgba(255, 212, 59, 0.05); }
-.subject-card[data-subject="dbms"]:hover { border-color: rgba(0, 245, 160, 0.4); box-shadow: 0 15px 35px rgba(0, 245, 160, 0.05); }
-.subject-card[data-subject="os"]:hover { border-color: rgba(0, 242, 254, 0.4); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.05); }
-.subject-card[data-subject="networks"]:hover { border-color: rgba(255, 91, 127, 0.4); box-shadow: 0 15px 35px rgba(255, 91, 127, 0.05); }
-.subject-card[data-subject="dsa"]:hover { border-color: rgba(168, 85, 247, 0.4); box-shadow: 0 15px 35px rgba(168, 85, 247, 0.05); }
+.subject-card[data-subject="cse"]:hover { border-color: rgba(255, 212, 59, 0.4); box-shadow: 0 15px 35px rgba(255, 212, 59, 0.05); }
+.subject-card[data-subject="ece"]:hover { border-color: rgba(0, 245, 160, 0.4); box-shadow: 0 15px 35px rgba(0, 245, 160, 0.05); }
+.subject-card[data-subject="mech"]:hover { border-color: rgba(0, 242, 254, 0.4); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.05); }
+.subject-card[data-subject="civil"]:hover { border-color: rgba(255, 91, 127, 0.4); box-shadow: 0 15px 35px rgba(255, 91, 127, 0.05); }
+.subject-card[data-subject="sciences"]:hover { border-color: rgba(168, 85, 247, 0.4); box-shadow: 0 15px 35px rgba(168, 85, 247, 0.05); }
 
 .card-icon {
   width: 48px;
@@ -712,11 +712,11 @@ html, body {
   height: 24px;
 }
 
-.python-icon { color: var(--color-python); background: rgba(255, 212, 59, 0.05); }
-.dbms-icon { color: var(--color-dbms); background: rgba(0, 245, 160, 0.05); }
-.os-icon { color: var(--color-os); background: rgba(0, 242, 254, 0.05); }
-.networks-icon { color: var(--color-networks); background: rgba(255, 91, 127, 0.05); }
-.dsa-icon { color: var(--color-dsa); background: rgba(168, 85, 247, 0.05); }
+.cse-icon { color: var(--color-cse); background: rgba(255, 212, 59, 0.05); }
+.ece-icon { color: var(--color-ece); background: rgba(0, 245, 160, 0.05); }
+.mech-icon { color: var(--color-mech); background: rgba(0, 242, 254, 0.05); }
+.civil-icon { color: var(--color-civil); background: rgba(255, 91, 127, 0.05); }
+.sciences-icon { color: var(--color-sciences); background: rgba(168, 85, 247, 0.05); }
 
 .card-title {
   font-family: var(--font-mono);
@@ -743,11 +743,11 @@ html, body {
   transition: all 0.25s ease;
 }
 
-.subject-card[data-subject="python"] .card-action { color: var(--color-python); }
-.subject-card[data-subject="dbms"] .card-action { color: var(--color-dbms); }
-.subject-card[data-subject="os"] .card-action { color: var(--color-os); }
-.subject-card[data-subject="networks"] .card-action { color: var(--color-networks); }
-.subject-card[data-subject="dsa"] .card-action { color: var(--color-dsa); }
+.subject-card[data-subject="cse"] .card-action { color: var(--color-cse); }
+.subject-card[data-subject="ece"] .card-action { color: var(--color-ece); }
+.subject-card[data-subject="mech"] .card-action { color: var(--color-mech); }
+.subject-card[data-subject="civil"] .card-action { color: var(--color-civil); }
+.subject-card[data-subject="sciences"] .card-action { color: var(--color-sciences); }
 
 .subject-card:hover .card-action svg {
   transform: translateX(4px);
@@ -1307,11 +1307,11 @@ html, body {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-.detail-item.border-python { border-left: 4px solid var(--color-python); }
-.detail-item.border-dbms { border-left: 4px solid var(--color-dbms); }
-.detail-item.border-os { border-left: 4px solid var(--color-os); }
-.detail-item.border-networks { border-left: 4px solid var(--color-networks); }
-.detail-item.border-dsa { border-left: 4px solid var(--color-dsa); }
+.detail-item.border-cse { border-left: 4px solid var(--color-cse); }
+.detail-item.border-ece { border-left: 4px solid var(--color-ece); }
+.detail-item.border-mech { border-left: 4px solid var(--color-mech); }
+.detail-item.border-civil { border-left: 4px solid var(--color-civil); }
+.detail-item.border-sciences { border-left: 4px solid var(--color-sciences); }
 
 .detail-header {
   display: flex;
@@ -1326,11 +1326,11 @@ html, body {
   font-weight: 600;
 }
 
-.text-python { color: var(--color-python); }
-.text-dbms { color: var(--color-dbms); }
-.text-os { color: var(--color-os); }
-.text-networks { color: var(--color-networks); }
-.text-dsa { color: var(--color-dsa); }
+.text-cse { color: var(--color-cse); }
+.text-ece { color: var(--color-ece); }
+.text-mech { color: var(--color-mech); }
+.text-civil { color: var(--color-civil); }
+.text-sciences { color: var(--color-sciences); }
 
 .detail-badge {
   font-size: 0.72rem;
@@ -1340,11 +1340,11 @@ html, body {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.py-badge { color: var(--color-python); border: 1px solid rgba(255, 212, 59, 0.15); }
-.db-badge { color: var(--color-dbms); border: 1px solid rgba(0, 245, 160, 0.15); }
-.os-badge { color: var(--color-os); border: 1px solid rgba(0, 242, 254, 0.15); }
-.net-badge { color: var(--color-networks); border: 1px solid rgba(255, 91, 127, 0.15); }
-.dsa-badge { color: var(--color-dsa); border: 1px solid rgba(168, 85, 247, 0.15); }
+.cse-badge { color: var(--color-cse); border: 1px solid rgba(255, 212, 59, 0.15); }
+.ece-badge { color: var(--color-ece); border: 1px solid rgba(0, 245, 160, 0.15); }
+.mech-badge { color: var(--color-mech); border: 1px solid rgba(0, 242, 254, 0.15); }
+.civil-badge { color: var(--color-civil); border: 1px solid rgba(255, 91, 127, 0.15); }
+.sciences-badge { color: var(--color-sciences); border: 1px solid rgba(168, 85, 247, 0.15); }
 
 .detail-content p {
   color: var(--text-secondary);
